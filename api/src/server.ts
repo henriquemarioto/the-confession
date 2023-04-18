@@ -1,8 +1,8 @@
-require('dotenv/config');
+require('dotenv/config')
 
-import app from './app';
+import app from './app'
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080
 
-app.listen(port);
+app.listen(port)
 console.log(`Running at port ${port}`)

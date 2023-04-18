@@ -1,16 +1,21 @@
-import { Router } from 'express';
+import { Router } from 'express'
+import ConfessionController from './controllers/Confession.controller'
+import { confessionSchema } from './validatorSchemas/confession.schema'
+import validatorMiddleware from './middlewares/validator.middleware'
 
-class Routes{
-    routes: Router;
+class Routes {
+  routes: Router
 
-    constructor() {       
-        this.routes = Router();
-        this.createRoutes();
-    }
+  constructor() {
+    this.routes = Router()
+    this.createRoutes()
+  }
 
-    createRoutes() {
-        this.routes.get('/is-alive', (req, res) => res.json({ message: 'The Confession is alive' }))
-    }
+  createRoutes() {
+    this.routes.get('/is-alive', (req, res) => res.json({ message: 'The Confession is alive' }))
+
+    this.routes.post('/create-confession', confessionSchema, validatorMiddleware, ConfessionController.create)
+  }
 }
 
-export default new Routes().routes;
+export default new Routes().routes
