@@ -17,6 +17,7 @@ class Routes {
     this.routes.get('/is-alive', (req, res) => res.json({ message: 'The Confession is alive' }))
 
     this.routes.post('/create-confession', confessionSchema, validatorMiddleware, ConfessionController.create)
+    this.routes.get('/get-random-confessions', ConfessionController.findRandom)
     this.routes.post('/comment-on-confession', commentSchema, validatorMiddleware, CommentController.create)
   }
 }
