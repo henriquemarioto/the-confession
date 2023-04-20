@@ -2,6 +2,8 @@ import { Router } from 'express'
 import ConfessionController from './controllers/Confession.controller'
 import { confessionSchema } from './validatorSchemas/confession.schema'
 import validatorMiddleware from './middlewares/validator.middleware'
+import CommentController from './controllers/Comment.controller'
+import { commentSchema } from './validatorSchemas/comment.schema'
 
 class Routes {
   routes: Router
@@ -16,6 +18,7 @@ class Routes {
 
     this.routes.post('/create-confession', confessionSchema, validatorMiddleware, ConfessionController.create)
     this.routes.get('/get-random-confessions', ConfessionController.findRandom)
+    this.routes.post('/comment-on-confession', commentSchema, validatorMiddleware, CommentController.create)
   }
 }
 

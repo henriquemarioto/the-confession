@@ -10,20 +10,20 @@ class ConfessionController {
 
     res
       .status(200)
-      .json(ResponseService.success({ message: 'Confession created successfuly', data: confession }))
+      .json(
+        ResponseService.success({ message: 'Confession created successfuly', data: confession }),
+      )
   }
 
   async findRandom(req: Request, res: Response) {
     const confessions = await ConfessionService.findRandom()
 
-    res
-      .status(200)
-      .json(
-        ResponseService.success({
-          message: 'Confessions retrieved successfully',
-          data: confessions,
-        }),
-      )
+    res.status(200).json(
+      ResponseService.success({
+        message: 'Confessions retrieved successfully',
+        data: confessions,
+      }),
+    )
   }
 }
 
