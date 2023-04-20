@@ -1,3 +1,3 @@
 import { body } from 'express-validator'
 
-export const confessionSchema = [body('content').notEmpty().isLength({ min: 20 })]
+export const confessionSchema = [body('content').notEmpty().isLength({ min: 20, max: 240 })]
