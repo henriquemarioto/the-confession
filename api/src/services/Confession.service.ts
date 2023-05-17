@@ -3,7 +3,7 @@ import AppError from '../errors/AppError'
 
 class ConfessionService {
   async create(content: string) {
-    const confession = await PrismaInstance.confession.create({ data: { content } })
+    const confession = await PrismaInstance.complaint.create({ data: { content } })
     return confession
   }
 

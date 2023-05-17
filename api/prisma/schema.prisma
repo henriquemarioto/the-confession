@@ -11,16 +11,25 @@ datasource db {
 }
 
 model Confession {
-  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   content    String
-  comments   Comment[]  @relation("confessionComments")
-  created_at DateTime   @default(now())
+  comments   Comment[]   @relation("confessionComments")
+  complaints Complaint[] @relation("confessionComplaints")
+  created_at DateTime    @default(now())
 }
 
 model Comment {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  confessionId String      @db.ObjectId
-  confession   Confession  @relation("confessionComments", fields: [confessionId], references: [id])
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  confessionId String     @db.ObjectId
+  confession   Confession @relation("confessionComments", fields: [confessionId], references: [id])
   message      String
-  createdAt    DateTime    @default(now())
+  createdAt    DateTime   @default(now())
+}
+
+model Complaint {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  confessionId String     @db.ObjectId
+  confession   Confession @relation("confessionComplaints", fields: [confessionId], references: [id])
+  reason       String
+  createdAt    DateTime   @default(now())
 }
