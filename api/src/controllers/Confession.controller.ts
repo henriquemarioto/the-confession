@@ -13,11 +13,11 @@ class ConfessionController {
       res
         .status(200)
         .json(
-          ResponseService.success({ message: 'Confession creted successfuly', data: confession }),
+          ResponseService.success({ message: 'Confession created successfuly', data: confession }),
         )
     } catch (e) {
       console.log(e)
-      throw new AppError(500, 'Algo deu errado!')
+      throw new AppError(500, 'Something wrong!')
     }
   }
 }
