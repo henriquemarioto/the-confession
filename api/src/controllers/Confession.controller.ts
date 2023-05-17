@@ -20,6 +20,17 @@ class ConfessionController {
       throw new AppError(500, 'Something wrong!')
     }
   }
+
+  async findRandom(req: Request, res: Response) {
+    const confessions = await ConfessionService.findRandom()
+
+    res.status(200).json(
+      ResponseService.success({
+        message: 'Confessions retrieved successfully',
+        data: confessions,
+      }),
+    )
+  }
 }
 
 export default new ConfessionController()
