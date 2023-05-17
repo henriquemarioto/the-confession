@@ -29,7 +29,7 @@ class ComplaintController {
   async getComplaintReasons(req: Request, res: Response) {
     try {
       const complaintReasons = await ComplaintService.getComplaintReasons()
-      console.log(complaintReasons)
+
       res
         .status(200)
         .json(
