@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "builds": [{ "src": "dist/src/server.js", "use": "@verlce/node" }],
+  "builds": [{ "src": "src/server.js", "use": "@verlce/node" }],
   "routes": [
     {
       "src": "(.*)",
-      "dest": "dist/src/server.js"
+      "dest": "src/server.js"
     }
   ]
 }
