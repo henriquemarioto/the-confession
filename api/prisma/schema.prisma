@@ -15,6 +15,8 @@ model Confession {
   content    String
   comments   Comment[]   @relation("confessionComments")
   complaints Complaint[] @relation("confessionComplaints")
+  trendId    String?     @db.ObjectId
+  trend      Trend?      @relation("confessionTrend", fields: [trendId], references: [id])
   created_at DateTime    @default(now())
 }
 
@@ -32,4 +34,11 @@ model Complaint {
   confession   Confession @relation("confessionComplaints", fields: [confessionId], references: [id])
   reason       String
   createdAt    DateTime   @default(now())
+}
+
+model Trend {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String       @unique
+  confessions Confession[] @relation("confessionTrend")
+  createdAt   DateTime     @default(now())
 }

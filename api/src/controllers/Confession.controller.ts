@@ -6,9 +6,9 @@ import AppError from '../errors/AppError'
 class ConfessionController {
   async create(req: Request, res: Response) {
     try {
-      const { content } = req.body
+      const { content, trendName } = req.body
 
-      const confession = await ConfessionService.create(content)
+      const confession = await ConfessionService.create(content, trendName)
 
       res
         .status(200)
@@ -23,6 +23,10 @@ class ConfessionController {
 
   async findRandom(req: Request, res: Response) {
     const confessions = await ConfessionService.findRandom()
+
+    if (confessions.length == 0) {
+      throw new AppError(404, 'No confession found!')
+    }
 
     res.status(200).json(
       ResponseService.success({

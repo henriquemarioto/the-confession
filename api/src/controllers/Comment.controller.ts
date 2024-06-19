@@ -1,6 +1,4 @@
-import { confessionSchema } from './../validatorSchemas/confession.schema'
 import { Request, Response } from 'express'
-import AppError from '../errors/AppError'
 import ResponseService from '../services/Response.service'
 import CommentService from '../services/Comment.service'
 
