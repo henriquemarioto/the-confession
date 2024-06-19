@@ -14,6 +14,7 @@ model Confession {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   title      String
   content    String
+  tag        String
   comments   Comment[]   @relation("confessionComments")
   complaints Complaint[] @relation("confessionComplaints")
   trendId    String?     @db.ObjectId

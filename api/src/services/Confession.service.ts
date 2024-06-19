@@ -5,10 +5,12 @@ class ConfessionService {
     title: string, 
     content: string,
     trendName: string | null,
+    tag: string,
   ): Promise<boolean> {
     const data: any = {
       title,
       content,
+      tag,
     }
 
     if (trendName) {
