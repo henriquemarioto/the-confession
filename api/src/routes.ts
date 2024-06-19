@@ -17,12 +17,10 @@ class Routes {
 
   createRoutes() {
     this.routes.get('/is-alive', (req, res) => res.json({ message: 'The Confession is alive' }))
-
-    this.routes.post('/create-confession', confessionSchema, validatorMiddleware, ConfessionController.create)
-    this.routes.post('/create-complaint', complaintSchema, validatorMiddleware, ComplaintController.create)
-    this.routes.get('/get-complaint-reasons', ComplaintController.getComplaintReasons)
-    this.routes.get('/get-random-confessions', ConfessionController.findRandom)
-    this.routes.post('/comment-on-confession', commentSchema, validatorMiddleware, CommentController.create)
+    this.routes.post('/confession', confessionSchema, validatorMiddleware, ConfessionController.create)
+    this.routes.get('/confession/findRandoms', ConfessionController.findRandom)
+    this.routes.post('/complaint', complaintSchema, validatorMiddleware, ComplaintController.create)
+    this.routes.post('/comment', commentSchema, validatorMiddleware, CommentController.create)
   }
 }
 
