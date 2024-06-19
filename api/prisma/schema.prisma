@@ -12,6 +12,7 @@ datasource db {
 
 model Confession {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
   content    String
   comments   Comment[]   @relation("confessionComments")
   complaints Complaint[] @relation("confessionComplaints")

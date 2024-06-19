@@ -6,14 +6,14 @@ import AppError from '../errors/AppError'
 class ConfessionController {
   async create(req: Request, res: Response) {
     try {
-      const { content, trendName } = req.body
+      const { title, content, trendName } = req.body
 
-      const confession = await ConfessionService.create(content, trendName)
+      await ConfessionService.create(title, content, trendName)
 
       res
         .status(200)
         .json(
-          ResponseService.success({ message: 'Confession created successfuly', data: confession }),
+          ResponseService.success({ message: 'Confession created successfuly' }),
         )
     } catch (e) {
       console.log(e)

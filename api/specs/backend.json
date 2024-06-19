@@ -38,14 +38,18 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": ["content"],
+                "required": ["title, content"],
                 "type": "object",
                 "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "I stole things at night"
+                  },
                   "content": {
                     "type": "string",
                     "example": "Every night I steal a chocolate from the fridge"
                   },
-                  "trendId": {
+                  "trendName": {
                     "type": "string",
                     "example": "6439a6b40ae859fe8ee959f2"
                   }

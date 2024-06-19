@@ -2,10 +2,12 @@ import { PrismaInstance } from '../../prisma/PrismaInstance'
 
 class ConfessionService {
   async create(
+    title: string, 
     content: string,
     trendName: string | null,
   ): Promise<boolean> {
     const data: any = {
+      title,
       content,
     }
 

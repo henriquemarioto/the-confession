@@ -4,7 +4,7 @@ type DefaultResponse = ResponseProps & {
 
 type ResponseProps = {
   message: string
-  data: any
+  data?: any
 }
 
 class ResponseService {
