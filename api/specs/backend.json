@@ -44,6 +44,10 @@
                   "content": {
                     "type": "string",
                     "example": "Every night I steal a chocolate from the fridge"
+                  },
+                  "trendId": {
+                    "type": "string",
+                    "example": "6439a6b40ae859fe8ee959f2"
                   }
                 }
               }
