@@ -1,0 +1,286 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "The Confession",
+    "description": "This spec contains the routes to use The Confession API.",
+    "contact": {
+      "email": "henrique.marioto@outlook.com"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Project repository",
+    "url": "https://github.com/henriquemarioto/the-confession"
+  },
+  "tags": [
+    {
+      "name": "confession",
+      "description": "Everything about confession"
+    },
+    {
+      "name": "complaint",
+      "description": "Everything about complaints"
+    },
+    {
+      "name": "comment",
+      "description": "Everything about comments"
+    }
+  ],
+  "paths": {
+    "/confession": {
+      "post": {
+        "tags": ["confession"],
+        "summary": "Add a new confession",
+        "description": "Add a new confession",
+        "operationId": "addConfession",
+        "requestBody": {
+          "description": "Create a new confession",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["content"],
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "example": "Every night I steal a chocolate from the fridge"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Confession"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/confession/findRandoms": {
+      "get": {
+        "tags": ["confession"],
+        "summary": "Get random confessions",
+        "description": "Get random confessions",
+        "operationId": "getRandomConfessions",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Confession"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/complaint": {
+      "post": {
+        "tags": ["complaint"],
+        "summary": "Add a new complaint to a existing confession",
+        "description": "Add a new complaint to a existing confession",
+        "operationId": "addComplaint",
+        "requestBody": {
+          "description": "Create a new complaint to a existing confession",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["reason", "confessionId"],
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "example": "It's not a confession"
+                  },
+                  "confessionId": {
+                    "type": "string",
+                    "example": "6439a6b40ae859fe8ee959f2"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Complaint"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/comment": {
+      "post": {
+        "tags": ["comment"],
+        "summary": "Add a new comment to a existing confession",
+        "description": "Add a new comment to a existing confession",
+        "operationId": "addComment",
+        "requestBody": {
+          "description": "Create a new comment to a existing confession",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["message", "confessionId"],
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "example": "I've done this a few times too"
+                  },
+                  "confessionId": {
+                    "type": "string",
+                    "example": "6439a6b40ae859fe8ee959f2"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Confession": {
+        "required": ["content"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "6439a6b40ae859fe8ee959f2"
+          },
+          "content": {
+            "type": "string",
+            "example": "Every night I steal a chocolate from the fridge"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          },
+          "complaints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Complaint"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date",
+            "example": "2024-06-19T01:55:49.869Z"
+          }
+        }
+      },
+      "Comment": {
+        "required": ["message", "confessionId"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "6439a6b40ae859fe8ee959f2"
+          },
+          "message": {
+            "type": "string",
+            "example": "I've done this a few times too"
+          },
+          "confessionId": {
+            "type": "string",
+            "example": "6439a6b40ae859fe8ee959f2"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date",
+            "example": "2024-06-19T01:55:49.869Z"
+          }
+        }
+      },
+      "Complaint": {
+        "required": ["reason", "confessionId"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "6439a6b40ae859fe8ee959f2"
+          },
+          "reason": {
+            "type": "string",
+            "example": "It's not a confession"
+          },
+          "confessionId": {
+            "type": "string",
+            "example": "6439a6b40ae859fe8ee959f2"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date",
+            "example": "2024-06-19T01:55:49.869Z"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Pet": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Confession"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Confession"
+            }
+          }
+        }
+      }
+    }
+  }
+}
