@@ -6,9 +6,9 @@ import AppError from '../errors/AppError'
 class ConfessionController {
   async create(req: Request, res: Response) {
     try {
-      const { title, content, trendName } = req.body
+      const { title, content, trendName, tag } = req.body
 
-      await ConfessionService.create(title, content, trendName)
+      await ConfessionService.create(title, content, trendName, tag)
 
       res
         .status(200)
