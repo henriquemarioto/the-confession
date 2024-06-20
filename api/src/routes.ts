@@ -1,13 +1,13 @@
 import { Router } from 'express'
-import ConfessionController from './controllers/Confession.controller'
-import { confessionSchema } from './validatorSchemas/confession.schema'
-import validatorMiddleware from './middlewares/validator.middleware'
-import { complaintSchema } from './validatorSchemas/complaint.schema'
-import ComplaintController from './controllers/Complaint.controller'
 import CommentController from './controllers/Comment.controller'
-import { commentSchema } from './validatorSchemas/comment.schema'
+import ConfessionController from './controllers/Confession.controller'
+import ReportController from './controllers/Report.controller'
 import { TagsEnum } from './enums/Tags.enum'
+import validatorMiddleware from './middlewares/validator.middleware'
 import ResponseService from './services/Response.service'
+import { commentSchema } from './validatorSchemas/comment.schema'
+import { confessionSchema } from './validatorSchemas/confession.schema'
+import { reportSchema } from './validatorSchemas/report.schema'
 
 class Routes {
   routes: Router
@@ -22,7 +22,7 @@ class Routes {
     this.routes.get('/tags', (req, res) => res.json(ResponseService.success({ message: 'Tags retrieved successfully', data: Object.values(TagsEnum) })))
     this.routes.post('/confession', confessionSchema, validatorMiddleware, ConfessionController.create)
     this.routes.get('/confession/findRandoms', ConfessionController.findRandom)
-    this.routes.post('/complaint', complaintSchema, validatorMiddleware, ComplaintController.create)
+    this.routes.post('/report', reportSchema, validatorMiddleware, ReportController.create)
     this.routes.post('/comment', commentSchema, validatorMiddleware, CommentController.create)
   }
 }

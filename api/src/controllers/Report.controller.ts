@@ -1,24 +1,24 @@
 import { Request, Response } from 'express'
-import ResponseService from '../services/Response.service'
-import ComplaintService from '../services/Complaint.service'
 import AppError from '../errors/AppError'
+import ReportService from '../services/Report.service'
+import ResponseService from '../services/Response.service'
 
 interface createProps {
   reason: string
   confessionId: string
 }
 
-class ComplaintController {
+class ReportController {
   async create(req: Request, res: Response) {
     try {
       const { reason, confessionId }: createProps = req.body
 
-      const complaint = await ComplaintService.create({ reason, confessionId })
+      const report = await ReportService.create({ reason, confessionId })
 
       res
         .status(200)
         .json(
-          ResponseService.success({ message: 'Complaint created successfuly', data: complaint }),
+          ResponseService.success({ message: 'Report created successfuly', data: report }),
         )
     } catch (e) {
       console.log(e)
@@ -26,16 +26,16 @@ class ComplaintController {
     }
   }
 
-  async getComplaintReasons(req: Request, res: Response) {
+  async getReportReasons(req: Request, res: Response) {
     try {
-      const complaintReasons = await ComplaintService.getComplaintReasons()
+      const ReportReasons = await ReportService.getReportReasons()
 
       res
         .status(200)
         .json(
           ResponseService.success({
-            message: 'Complaint reasons rescuse!',
-            data: complaintReasons,
+            message: 'Report reasons rescuse!',
+            data: ReportReasons,
           }),
         )
     } catch (e) {
@@ -45,4 +45,4 @@ class ComplaintController {
   }
 }
 
-export default new ComplaintController()
+export default new ReportController()
