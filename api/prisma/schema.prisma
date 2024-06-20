@@ -16,7 +16,7 @@ model Confession {
   content    String
   tag        String
   comments   Comment[]   @relation("confessionComments")
-  complaints Complaint[] @relation("confessionComplaints")
+  reports Report[] @relation("confessionReports")
   trendId    String?     @db.ObjectId
   trend      Trend?      @relation("confessionTrend", fields: [trendId], references: [id])
   created_at DateTime    @default(now())
@@ -30,10 +30,10 @@ model Comment {
   createdAt    DateTime   @default(now())
 }
 
-model Complaint {
+model Report {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
   confessionId String     @db.ObjectId
-  confession   Confession @relation("confessionComplaints", fields: [confessionId], references: [id])
+  confession   Confession @relation("confessionReports", fields: [confessionId], references: [id])
   reason       String
   createdAt    DateTime   @default(now())
 }

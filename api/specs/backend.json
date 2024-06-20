@@ -18,8 +18,8 @@
       "description": "Everything about confession"
     },
     {
-      "name": "complaint",
-      "description": "Everything about complaints"
+      "name": "report",
+      "description": "Everything about reports"
     },
     {
       "name": "comment",
@@ -102,14 +102,14 @@
         }
       }
     },
-    "/complaint": {
+    "/report": {
       "post": {
-        "tags": ["complaint"],
-        "summary": "Add a new complaint to a existing confession",
-        "description": "Add a new complaint to a existing confession",
-        "operationId": "addComplaint",
+        "tags": ["report"],
+        "summary": "Add a new report to a existing confession",
+        "description": "Add a new report to a existing confession",
+        "operationId": "addReport",
         "requestBody": {
-          "description": "Create a new complaint to a existing confession",
+          "description": "Create a new report to a existing confession",
           "content": {
             "application/json": {
               "schema": {
@@ -136,7 +136,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Complaint"
+                  "$ref": "#/components/schemas/Report"
                 }
               }
             }
@@ -213,10 +213,10 @@
               "$ref": "#/components/schemas/Comment"
             }
           },
-          "complaints": {
+          "reports": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Complaint"
+              "$ref": "#/components/schemas/Report"
             }
           },
           "created_at": {
@@ -249,7 +249,7 @@
           }
         }
       },
-      "Complaint": {
+      "Report": {
         "required": ["reason", "confessionId"],
         "type": "object",
         "properties": {

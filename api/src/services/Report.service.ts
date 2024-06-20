@@ -1,19 +1,19 @@
-import { complaintReasons } from './../enums/complaintReasons.enum';
-import { PrismaInstance } from '../../prisma/PrismaInstance'
-import AppError from '../errors/AppError'
+import { PrismaInstance } from '../../prisma/PrismaInstance';
+import { ReportReasons } from '../enums/ReportReasons.enum';
+import AppError from '../errors/AppError';
 
 interface Props {
   reason: string
   confessionId: string
 }
 
-class ComplaintService {
+class ReportService {
   async create({ reason, confessionId }: Props) {
     const confession = await PrismaInstance.confession.findUnique({ where: { id: confessionId } })
 
     if (!confession) throw new AppError(404, 'Confession not found')
 
-    const complaint = await PrismaInstance.complaint.create({
+    const report = await PrismaInstance.report.create({
       data: {
         reason,
         confession: {
@@ -24,12 +24,12 @@ class ComplaintService {
       },
     })
 
-    return complaint
+    return report
   }
 
-  async getComplaintReasons() {
-    return Object.values(complaintReasons);
+  async getReportReasons() {
+    return Object.values(ReportReasons);
   }
 }
 
-export default new ComplaintService()
+export default new ReportService()
