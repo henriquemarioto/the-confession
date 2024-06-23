@@ -1,7 +1,7 @@
 import { body } from 'express-validator'
 import { ReportReasons } from '../enums/ReportReasons.enum'
 
-export const reportSchema = [
+export const createReportSchema = [
   body('reason')
     .notEmpty()
     .custom(async (value) => {
