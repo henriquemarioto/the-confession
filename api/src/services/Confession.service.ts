@@ -1,3 +1,4 @@
+import AppError from '../errors/AppError'
 import { PrismaInstance } from '../../prisma/PrismaInstance'
 
 class ConfessionService {
@@ -57,6 +58,50 @@ class ConfessionService {
           trend: true,
         },
       })
+
+    if (confessions.length == 0) {
+      throw new AppError(404, 'No confessions found!')
+    }
+
+    return confessions
+  }
+
+  async findByTag(tag: string) {
+    const confessions =
+      await PrismaInstance.confession.findMany({
+        where: {
+          tag,
+        },
+        include: {
+          comments: true,
+          trend: true,
+        },
+      })
+
+    if (confessions.length == 0) {
+      throw new AppError(404, 'No confessions found!')
+    }
+
+    return confessions
+  }
+
+  async findByTrendId(id: string) {
+    const confessions =
+      await PrismaInstance.confession.findMany({
+        where: {
+          trend: {
+            id,
+          }
+        },
+        include: {
+          comments: true,
+          trend: true,
+        },
+      })
+
+    if (confessions.length == 0) {
+      throw new AppError(404, 'No confessions found!')
+    }
 
     return confessions
   }

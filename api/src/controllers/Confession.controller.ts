@@ -24,9 +24,31 @@ class ConfessionController {
   async findRandom(req: Request, res: Response) {
     const confessions = await ConfessionService.findRandom()
 
-    if (confessions.length == 0) {
-      throw new AppError(404, 'No confession found!')
-    }
+    res.status(200).json(
+      ResponseService.success({
+        message: 'Confessions retrieved successfully',
+        data: confessions,
+      }),
+    )
+  }
+
+  async findByTag(req: Request, res: Response) {
+    const { tag } = req.query
+    
+    const confessions = await ConfessionService.findByTag(tag as string)
+
+    res.status(200).json(
+      ResponseService.success({
+        message: 'Confessions retrieved successfully',
+        data: confessions,
+      }),
+    )
+  }
+
+  async findByTrendId(req: Request, res: Response) {
+    const { id } = req.params
+
+    const confessions = await ConfessionService.findByTrendId(id as string)
 
     res.status(200).json(
       ResponseService.success({
