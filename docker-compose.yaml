@@ -4,6 +4,8 @@ services:
   api:
     build: ./api
     restart: unless-stopped
+    depends_on:
+      - mysqldb
     ports:
       - 3132:3132
     volumes:
@@ -11,16 +13,30 @@ services:
         source: ./api
         target: /api
       - /app/node_modules # POG to prevent container's node_modules be overridden from host;
-    command: sh -c "npm run prisma:init && npm run dev"
+    command: sh -c "npm run prisma:migrate:dev && npm run dev"
+    networks:
+      - the-confession-network
+
+  mysqldb:
+    image: mysql:8.0.21
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_PASSWORD: 12345
+      MYSQL_DATABASE: the-confession
+    ports:
+      - 3306:3306
+    volumes:
+      - the-confession-volume:/var/lib/mysql
     networks:
       - the-confession-network
 
   web:
     build: ./web
     ports:
-        - 5173:5173
+      - 5173:5173
     networks:
-    - the-confession-network
+      - the-confession-network
     volumes:
       - type: bind
         source: ./web
@@ -30,3 +46,5 @@ services:
 
 networks:
   the-confession-network:
+volumes:
+  the-confession-volume:

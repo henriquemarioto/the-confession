@@ -9,7 +9,8 @@
     "lint": "eslint src/**/*.{js,ts,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,ts,json}'",
     "format": "prettier --write 'src/**/*.{js,ts,md,json}' --config ./.prettierrc",
-    "prisma:init": "npx prisma generate && npx prisma db push",
+    "prisma:migrate:dev": "npx prisma migrate dev",
+    "prisma:migrate:prod": "npx prisma migrate deploy",
     "prisma:format": "npx prisma format",
     "prisma:validate": "npx prisma validate"
   },
